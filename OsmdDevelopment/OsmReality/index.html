@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3-AQivwtRIpI7_UHBeQPhaI9kVX-tVPI"></script>
+    <script type="text/javascript" src="scripts/angular-file-upload-shim.min.js"></script>
+    <script type="text/javascript" src="scripts/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/angular-route.min.js"></script>
+    <script type="text/javascript" src="scripts/angular-file-upload-all.min.js"></script> 
+    <script type="text/javascript" src="scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+
+    <script type="text/javascript" src="ControllersAngular/realityApp.js"></script>
+    <script type="text/javascript" src="ControllersAngular/realityConstants.js"></script>
+    <script type="text/javascript" src="ControllersAngular/realityHeaderController.js"></script>
+    <script type="text/javascript" src="ControllersAngular/realityListController.js"></script>
+    <script type="text/javascript" src="ControllersAngular/realityDetailController.js"></script>
+    <script type="text/javascript" src="ControllersAngular/realityCreateController.js"></script>
+    <script type="text/javascript" src="ControllersAngular/realitySession.js"></script>
+    <script type="text/javascript" src="ControllersAngular/realityLoginController.js"></script>
+       
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/reality.css" rel="stylesheet" />
+
+</head>
+<body ng-app="realityApp">
+    <div class="pageHeader">
+        <div style="float:left;" ng-controller="headerController">
+            <h1>Realitní portál</h1>
+            <div class="btn-group">
+                <a class="btn btn-default" href="#/realityList">Vyhledávání</a>
+                <a class="btn btn-default" href="#/realityCreate" ng-show="user.isAuth">Zadat nemovitost</a>
+            </div>
+        </div>
+        <div style="float: left" ng-include="'Views/Login.html'"></div>
+        <br />
+    </div>
+    <div ng-view>
+
+    </div>
+    <div class="pageFooter">
+        by Jan Austerlitz
+    </div>
+</body>
+</html>

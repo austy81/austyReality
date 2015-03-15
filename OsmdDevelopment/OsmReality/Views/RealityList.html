@@ -1,0 +1,50 @@
+﻿<div ng-init="init()">
+    <div>
+        <form class="pageLeft">
+            <h3 style="margin-left:5px;">Vyhledávání</h3>
+            <div>Dispozice</div>
+            <div id="DealTypeGroup" class="btn-group">
+                <label class="btn btn-default" ng-model="searchParamsDisposition[0]" btn-checkbox>1</label>
+                <label class="btn btn-default" ng-model="searchParamsDisposition[1]" btn-checkbox>2</label>
+                <label class="btn btn-default" ng-model="searchParamsDisposition[2]" btn-checkbox>3</label>
+                <label class="btn btn-default" ng-model="searchParamsDisposition[3]" btn-checkbox>4</label>
+                <label class="btn btn-default" ng-model="searchParamsDisposition[4]" btn-checkbox>5</label>
+                <label class="btn btn-default" ng-model="searchParamsDisposition[5]" btn-checkbox>6+</label>
+            </div>
+            <br />
+            <br />
+            <div>Město</div>
+            <input type="text" class="form-control" ng-model="searchParamsCity" />
+            <br />
+            <div>Lokalita</div>
+            <input type="text" class="form-control" ng-model="searchParamsLocality" />
+            <br />
+            <div>Cena</div>
+            <div>
+                <input id="priceFrom" type="number" class="form-control" ng-model="searchParamsPriceFrom" />
+                -
+                <input id="priceTo" type="number" class="form-control" ng-model="searchParamsPriceTo" />
+            </div>
+            <br />
+            <div><button class="btn btn-default" ng-click="searchReality()">Vyhledat</button></div>
+        </form>
+    </div>
+
+    <div class="pageContent" style="margin-left: 5px; overflow-y: scroll; height: 600px;">
+        <h3 style="margin-left:5px;">Výsledky ({{realityListLength();}})</h3>
+        <div ng-repeat="x in realityList"
+             style="margin:5px 10px 10px 10px">
+            <div ng-include="'Views/searchResultReality.html'">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="pageRight" style="height: 600px;">
+        <div id="map-canvas" style="height: 100%;margin: 0px;padding: 0px;"></div>
+    </div>
+
+    <script type="text/ng-template" id="realityDetailPopup">
+        <div ng-include="'Views/realityDetail.html'"></div>
+    </script>
+</div>

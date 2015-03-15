@@ -1,0 +1,18 @@
+﻿<div ng-controller="loginController">
+    
+    <div ng-show="user.isAuth">
+        <div><b>{{user.userName}}</b></div>
+        <button class="btn btn-default" ng-click="logout()">Logout</button>
+    </div>
+    
+    <div ng-show="!user.isAuth">
+        <b>Přihlášení</b>
+        <div>
+            <input class="form-control" id="LoginUserEmail" ng-model="emailInput" size="20" type="text" placeholder="email" />
+        </div>
+        <div>
+            <input class="form-control" id="LoginUserPassword" ng-model="passwordInput" size="20" type="password" placeholder="heslo" />
+        </div>
+        <button class="btn btn-default" ng-click="login()">Přihlásit</button>
+    </div>
+</div>

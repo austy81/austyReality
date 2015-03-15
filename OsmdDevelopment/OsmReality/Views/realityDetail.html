@@ -1,0 +1,38 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">
+        Detail nemovitosti
+        <button class="btn btn-default" style="float:right;" ng-click="cancel()">
+            Zavřít
+        </button>
+    </h3>
+</div>
+<div class="modal-body">
+    <div id="mainTop">
+        <img ng-src="/images/img/{{ selectedReality.Img }}" width="430" height="300" style="float: left; margin-right: 10px; margin-bottom: 10px; " />
+        <table>
+            <tr>
+                <td>{{ selectedReality.DealType }}</td>
+                <td>{{ selectedReality.Disposition }}</td>
+            </tr>
+            <tr style="color:GrayText;margin-top:10px">
+                <td>Lokalita</td>
+                <td>
+                    {{ selectedReality.City }} - {{ selectedReality.Locality }}
+                </td>
+            </tr>
+            <tr style="font-size: 18px; margin-top: 10px;">
+                <td>Cena</td>
+                <td>{{ selectedReality.Price }} Kč</td>
+            </tr>
+            <tr>
+                <td>Přidáno</td>
+                <td>{{ selectedReality.UpdateDate }} Kč</td>
+            </tr>
+        </table>
+    </div>
+    <div id="mainBottom" style="clear:both">
+        {{ selectedReality.DealDescription }}
+    </div>
+</div>
+<div class="modal-footer">
+</div>

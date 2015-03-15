@@ -1,0 +1,70 @@
+﻿*{
+padding : 0;
+margin : 0;
+border : 0;
+/*background-color: rgb(150, 255, 120);*/
+}
+body{
+}
+.blended_grid{
+display : block;
+width : 100%;
+overflow : auto;
+margin : 30px auto 0 auto;
+}
+.pageHeader{
+float : left;
+clear : none;
+height : 120px;
+width : 100%;
+}
+.pageLeft{
+float : left;
+clear : none;
+width : 220px;
+/*
+border: 1px solid #888; 
+background-color: #428bca;
+color: white;
+    */ 
+margin-top: 5px;
+margin-left: 5px;
+padding-right: 5px;
+padding-bottom: 5px;
+padding-left: 5px;
+}
+.pageContent{
+float : left;
+clear : none;
+width : 350px;
+}
+.pageRight{
+float : left;
+clear : none;
+width : 700px;
+height: 600px;
+margin-top: 5px;
+padding-top: 5px;
+padding-right: 5px;
+padding-bottom: 5px;
+padding-left: 5px; 
+/*border: 1px solid #808080;*/
+}
+.pageFooter{
+float : left;
+clear : none;
+height : 100px;
+width : 100%;
+}
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 200px;
+    height: 65px;
+    text-align: center;
+    padding-top: 25px;
+    margin: 10px;
+}
+.dragover {
+    border: 5px dashed blue;
+}
