@@ -6,9 +6,9 @@ using System.Web;
 
 namespace AustyReality.Models
 {
-    public class RealityDbInitializer : CreateDatabaseIfNotExists<OsmRealityContext>
+    public class RealityDbInitializer : CreateDatabaseIfNotExists<RealityDbContext>
     {
-        protected override void Seed(OsmRealityContext context)
+        protected override void Seed(RealityDbContext context)
         {
             IList<RealityUser> defaultUser = new List<RealityUser>();
 

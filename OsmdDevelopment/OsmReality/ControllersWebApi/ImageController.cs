@@ -8,23 +8,20 @@ using System.Web.Http;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Drawing;
-using AustyReality.Helpers;
-using Microsoft.WindowsAzure.Storage.Blob;
 using System.Drawing.Imaging;
 
 namespace AustyReality.ControllersWebApi
 {
     public class ImageController : ApiController
     {
-
-        Size smallImgSize = new Size(120, 100);
-        Size normalImgSize = new Size(430, 300);
-        int imageQuality = 80;
+        readonly Size smallImgSize = new Size(120, 100);
+        readonly Size normalImgSize = new Size(430, 300);
+        private const int imageQuality = 80;
 
         [HttpGet, Route("api/Image")]
         public IEnumerable<RealityImage> Get(int realityId)
         {
-            using (var db = new AustyReality.Models.OsmRealityContext())
+            using (var db = new RealityDbContext())
             {
                 return db.RealityImages.Where(x => x.RealityId == realityId);
             }
@@ -41,13 +38,13 @@ namespace AustyReality.ControllersWebApi
             var provider = new MultipartMemoryStreamProvider();
             await Request.Content.ReadAsMultipartAsync(provider);
             
-            using (var db = new AustyReality.Models.OsmRealityContext())
+            using (var db = new RealityDbContext())
             {
                 
                 foreach (var file in provider.Contents)
                 {
-                    var image = new RealityImage() 
-                        {
+                    var image = new RealityImage
+                    {
                             RealityId = realityId,
                             Guid = Guid.NewGuid().ToString()
                         };
@@ -86,7 +83,7 @@ namespace AustyReality.ControllersWebApi
 
         private int GetRealityId(HttpRequestHeaders headers)
         {
-            IEnumerable<string> realityIdArr = new string[] { };
+            IEnumerable<string> realityIdArr;
             if (!headers.TryGetValues("realityId", out realityIdArr))
                 throw new Exception();
 

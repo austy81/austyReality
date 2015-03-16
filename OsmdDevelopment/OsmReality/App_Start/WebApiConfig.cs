@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Serialization;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Web.Http;
 
 namespace AustyReality

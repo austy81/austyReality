@@ -18,6 +18,6 @@ namespace AustyReality.Models
         [MaxLength(100)]
         public string Password { get; set; }
 
-        public virtual ICollection<Reality> Realities { get; set; }
+        public ICollection<Reality> Realities { get; set; }
     }
 }

@@ -12,8 +12,9 @@ namespace AustyReality.ControllersWebApi
 {
     public class UserController : ApiController
     {
-        private OsmRealityContext db = new OsmRealityContext();
-        CacheItemPolicy cacheItemPolicy = new CacheItemPolicy()
+        private RealityDbContext _realityDb = new RealityDbContext();
+
+        readonly CacheItemPolicy cacheItemPolicy = new CacheItemPolicy
         {
             SlidingExpiration = TimeSpan.FromMinutes(20)
         };
@@ -21,14 +22,14 @@ namespace AustyReality.ControllersWebApi
         [ClientAuthorization]
         public IQueryable<RealityUser> Get()
         {
-            return db.Users;
+            return _realityDb.Users;
         }
 
 
         [HttpGet]
         public object Login(string username, string password)
         {
-            RealityUser user = db.Users.Where(u => u.Email == username && u.Password == password).FirstOrDefault();
+            RealityUser user = _realityDb.Users.SingleOrDefault(u => u.Email == username && u.Password == password);
             if (user == null)
             {
                 return NotFound();
@@ -53,7 +54,7 @@ namespace AustyReality.ControllersWebApi
             if (MemoryCache.Default.Contains(SessionId))
             {
                 MemoryCache.Default.Remove(SessionId);
-                return Ok(true);;
+                return Ok(true);
             }
             return NotFound();
         }
@@ -71,11 +72,11 @@ namespace AustyReality.ControllersWebApi
                 return BadRequest();
             }
 
-            db.Entry(user).State = EntityState.Modified;
+            _realityDb.Entry(user).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                _realityDb.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -83,10 +84,7 @@ namespace AustyReality.ControllersWebApi
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -101,8 +99,8 @@ namespace AustyReality.ControllersWebApi
                 return BadRequest(ModelState);
             }
 
-            db.Users.Add(user);
-            db.SaveChanges();
+            _realityDb.Users.Add(user);
+            _realityDb.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = user.RealityUserId }, user);
         }
@@ -111,14 +109,14 @@ namespace AustyReality.ControllersWebApi
         [ResponseType(typeof(RealityUser))]
         public IHttpActionResult Delete(int id)
         {
-            RealityUser user = db.Users.Find(id);
+            RealityUser user = _realityDb.Users.Find(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            db.Users.Remove(user);
-            db.SaveChanges();
+            _realityDb.Users.Remove(user);
+            _realityDb.SaveChanges();
 
             return Ok(user);
         }
@@ -127,14 +125,14 @@ namespace AustyReality.ControllersWebApi
         {
             if (disposing)
             {
-                db.Dispose();
+                _realityDb.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool UserExists(int id)
         {
-            return db.Users.Count(e => e.RealityUserId == id) > 0;
+            return _realityDb.Users.Count(e => e.RealityUserId == id) > 0;
         }
     }
 }

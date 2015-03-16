@@ -926,7 +926,7 @@
     </Compile>
     <Compile Include="ControllersWebApi\ImageResizer.cs" />
     <Compile Include="Migrations\DbInitializer.cs" />
-    <Compile Include="Models\OsmRealityContext.cs" />
+    <Compile Include="Models\RealityDbContext.cs" />
     <Compile Include="Models\Reality.cs" />
     <Compile Include="Models\RealityImage.cs" />
     <Compile Include="Models\RealityUser.cs" />
@@ -961,8 +961,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,13 +1,12 @@
 ﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 
 namespace AustyReality.ControllersWebApi
 {
-    public class AzureBlob
+    public static class AzureBlob
     {
         public enum RealityBlobType
         {
@@ -35,7 +34,7 @@ namespace AustyReality.ControllersWebApi
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
             //blockBlob.UploadFromStream(img);
 
-            using (var fileStream = System.IO.File.OpenRead(@"D:\Fotos\prodej\IMG-20141122-00740.jpg"))
+            using (var fileStream = File.OpenRead(@"D:\Fotos\prodej\IMG-20141122-00740.jpg"))
             {
                 blockBlob.UploadFromStream(fileStream);
             } 

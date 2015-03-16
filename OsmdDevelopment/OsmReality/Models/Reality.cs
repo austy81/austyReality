@@ -38,7 +38,7 @@ namespace AustyReality.Models
         public int RealityUserId { get; set; }
 
         [ForeignKey("RealityUserId")]
-        public virtual RealityUser RealityUser { get; set; }
+        public RealityUser RealityUser { get; set; }
 
         [Column(TypeName = "DateTime2")]
         [Required]
@@ -82,10 +82,9 @@ namespace AustyReality.Models
 
         public int Price { get; set; }
 
-        //[Required]
         [MaxLength(100)]
         public string DealDescription { get; set; }
 
-        public virtual ICollection<RealityImage> Images { get; set; }
+        public ICollection<RealityImage> Images { get; set; }
     }
 }

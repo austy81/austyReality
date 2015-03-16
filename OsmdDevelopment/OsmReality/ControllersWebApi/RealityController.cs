@@ -1,16 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
-using AustyReality.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.Web.Http;
 using System.Data.Entity;
-using AustyReality.ControllersWebApi;
+using System.Linq;
+using System.Web.Http;
+using AustyReality.Models;
 
-namespace AustyReality.Controllers
+namespace AustyReality.ControllersWebApi
 {
 
     public class RealityController : ApiController
@@ -20,7 +15,7 @@ namespace AustyReality.Controllers
         {
             if (searchParameters == null) return null;
 
-            using (var db = new OsmRealityContext())
+            using (var db = new RealityDbContext())
             {
                 var realities = db.Realities
                     .Where(r => (
@@ -40,7 +35,7 @@ namespace AustyReality.Controllers
         [HttpGet]
         public object Get(int id)
         {
-            using (var db = new OsmRealityContext())
+            using (var db = new RealityDbContext())
             {
                 return db.Realities.FirstOrDefault(x=>x.RealityId == id);
             }
@@ -52,7 +47,7 @@ namespace AustyReality.Controllers
         {
             reality.InsertDate = DateTime.Now;
 
-            using (var db = new AustyReality.Models.OsmRealityContext())
+            using (var db = new AustyReality.Models.RealityDbContext())
             {
                 db.Realities.Add(reality);
                 db.SaveChanges();
@@ -64,9 +59,9 @@ namespace AustyReality.Controllers
         [HttpDelete]
         public void Delete(int id)
         {
-            using (var db = new OsmRealityContext())
+            using (var db = new RealityDbContext())
             {
-                db.Realities.Remove(new Reality() { RealityId = id });
+                db.Realities.Remove(new Reality { RealityId = id });
             }
  
         }

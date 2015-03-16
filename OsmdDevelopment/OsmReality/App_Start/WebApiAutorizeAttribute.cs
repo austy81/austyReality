@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Controllers;
@@ -28,13 +29,9 @@ namespace AustyReality
             IEnumerable<string> tokens;
             if (actionContext.Request.Headers.TryGetValues(sessionHeaderName,out tokens))
             {
-                foreach (var token in tokens)
-                {
-                    if(!string.IsNullOrEmpty(token))
-                    {
-                        return MemoryCache.Default.Contains(token);
-                    }
-                }
+                return (from token in tokens 
+                        where !string.IsNullOrEmpty(token) 
+                        select MemoryCache.Default.Contains(token)).FirstOrDefault();
             }
             return false;
         }
