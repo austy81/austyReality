@@ -14,8 +14,8 @@ namespace AustyReality.ControllersWebApi
 {
     public class ImageController : ApiController
     {
-        readonly Size smallImgSize = new Size(120, 100);
-        readonly Size normalImgSize = new Size(430, 300);
+        readonly Size imgSizeSmall = new Size(120, 100);
+        readonly Size imgSizeNormal = new Size(430, 300);
         private const int imageQuality = 80;
 
         [HttpGet, Route("api/Image")]
@@ -43,7 +43,7 @@ namespace AustyReality.ControllersWebApi
                 
                 foreach (var file in provider.Contents)
                 {
-                    var image = new RealityImage
+                    var realityImage = new RealityImage
                     {
                             RealityId = realityId,
                             Guid = Guid.NewGuid().ToString()
@@ -51,24 +51,17 @@ namespace AustyReality.ControllersWebApi
 
                     try
                     {
-
+                        //Original sized image
                         //var buffer = await file.ReadAsStreamAsync();
                         //AzureBlob.UploadBlob(buffer, string.Format("{0}-{1}.jpg", image.RealityId, image.Guid), AzureBlob.RealityBlobType.SmallImage);
 
-
                         var stream = await file.ReadAsStreamAsync();
-                        var myImage = Image.FromStream(stream);
-                        myImage = ImageResizer.Resize(myImage, smallImgSize, imageQuality);
-                        
-                        var smallImg = ImageResizer.Resize(myImage, smallImgSize, imageQuality);
-                        Stream smallImgStream = new MemoryStream();
-                        smallImg.Save(smallImgStream,ImageFormat.Jpeg);
-                        AzureBlob.UploadBlob(smallImgStream, string.Format("{0}-{1}.jpg", image.RealityId, image.Guid), AzureBlob.RealityBlobType.SmallImage);
+                        var originalImage = Image.FromStream(stream);
 
-                        //var normalImg = ImageResizer.Resize(myImage, normalImgSize.Width, normalImgSize.Height, imageQuality);
-                        //AzureBlob.UploadBlob(normalImg, string.Format("{0}-{1}.jpg", image.RealityId, image.Guid), AzureBlob.RealityBlobType.NormalImage);
+                        UploadImage(originalImage, realityImage, imgSizeSmall, AzureBlob.RealityBlobType.SmallImage);
+                        UploadImage(originalImage, realityImage, imgSizeNormal, AzureBlob.RealityBlobType.NormalImage);
 
-                        db.RealityImages.Add(image);
+                        db.RealityImages.Add(realityImage);
                         db.SaveChanges();
                     }
                     catch(Exception e) {
@@ -79,6 +72,20 @@ namespace AustyReality.ControllersWebApi
             }
             
             return Ok();
+        }
+
+        private void UploadImage(Image imageData, RealityImage image, Size imgSize, AzureBlob.RealityBlobType blobType)
+        {
+            var imgResized = ImageResizer.Resize(imageData, imgSize, imageQuality);
+            imgResized.Save(string.Format(@"c:\temp\{0}-{1}.jpg", image.RealityId, image.Guid));
+            return;
+
+            Stream resizedImageStrem = new MemoryStream();
+            imgResized.Save(resizedImageStrem, ImageFormat.Jpeg);
+            AzureBlob.UploadBlob(
+                resizedImageStrem, 
+                string.Format("{0}-{1}.jpg", image.RealityId, image.Guid), 
+                blobType);
         }
 
         private int GetRealityId(HttpRequestHeaders headers)

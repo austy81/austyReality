@@ -32,12 +32,12 @@ namespace AustyReality.ControllersWebApi
         {
             var container = GetBlobContainer(blobType);
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
-            //blockBlob.UploadFromStream(img);
+            blockBlob.UploadFromStream(img);
 
-            using (var fileStream = File.OpenRead(@"D:\Fotos\prodej\IMG-20141122-00740.jpg"))
-            {
-                blockBlob.UploadFromStream(fileStream);
-            } 
+            //using (var fileStream = File.OpenRead(@"D:\Fotos\prodej\IMG-20141122-00740.jpg"))
+            //{
+            //    blockBlob.UploadFromStream(fileStream);
+            //} 
          }
 
         private static CloudBlobContainer GetBlobContainer(RealityBlobType blobType)
