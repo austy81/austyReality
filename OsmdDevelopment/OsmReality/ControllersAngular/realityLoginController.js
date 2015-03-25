@@ -12,7 +12,7 @@ angular.module('realityApp')
 
             $scope.passwordInput = '';
 
-            var promise = authService.login(email, password).then(function (user) {
+            var promise = authService.login(email, password).then(function () {
                 $scope.emailInput = '';
             }, function (reason) {
                 alert('Failed: ' + reason);

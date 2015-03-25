@@ -112,7 +112,6 @@
     <Content Include="ControllersAngular\realityCreateController.js" />
     <Content Include="ControllersAngular\realityDetailController.js" />
     <Content Include="ControllersAngular\realityListController.js" />
-    <Content Include="ControllersAngular\realityHeaderController.js" />
     <Content Include="ControllersAngular\realityLoginController.js" />
     <Content Include="ControllersAngular\realitySession.js" />
     <Content Include="ControllersAngular\tests\jsTest.js" />

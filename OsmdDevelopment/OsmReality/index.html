@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
+    <title>Austy reality</title>
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3-AQivwtRIpI7_UHBeQPhaI9kVX-tVPI"></script>
     <script type="text/javascript" src="scripts/angular-file-upload-shim.min.js"></script>
@@ -24,23 +24,28 @@
     <link href="css/reality.css" rel="stylesheet" />
 
 </head>
-<body ng-app="realityApp">
-    <div class="pageHeader">
-        <div style="float:left;" ng-controller="headerController">
-            <h1>Realitní portál</h1>
-            <div class="btn-group">
-                <a class="btn btn-default" href="#/realityList">Vyhledávání</a>
-                <a class="btn btn-default" href="#/realityCreate" ng-show="user.isAuth">Zadat nemovitost</a>
-            </div>
-        </div>
-        <div style="float: left" ng-include="'Views/Login.html'"></div>
-        <br />
-    </div>
-    <div ng-view>
+    <body ng-app="realityApp">
+        <div class="container center-block">
+            <header class="navbar navbar-default" ng-controller="loginController">
+                <div class="navbar-header">
+                    <h1>Realitní portál</h1>
+                    <div class="btn-group">
+                        <a class="btn btn-default" href="#/realityList">Vyhledávání</a>
+                        <a class="btn btn-default" href="#/realityCreate" ng-show="user.isAuth">Moje</a>
+                    </div>
+                </div>
+                <div class="navbar-right" ng-include="'Views/Login.html'"></div>
+            </header>
+            <main class="row"  ng-view>
 
-    </div>
-    <div class="pageFooter">
-        by Jan Austerlitz
-    </div>
-</body>
+            </main>
+            <footer>
+                <div class="row">
+                    <div class="col-md-1 ">
+                        by Jan Austerlitz
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
 </html>
