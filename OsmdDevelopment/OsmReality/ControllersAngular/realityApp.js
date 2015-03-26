@@ -1,4 +1,4 @@
-﻿angular.module('realityApp', ['ngRoute', 'ui.bootstrap', 'angularFileUpload'])
+﻿angular.module('realityApp', ['ngRoute', 'ui.bootstrap', 'angularFileUpload', 'uiGmapgoogle-maps'])
     .config(['$routeProvider', function ($routeProvider) {
 
         $routeProvider.
@@ -18,4 +18,11 @@
             redirectTo: '/realityList'
         });
 
-    }]);
+    }])
+    .config(function (uiGmapGoogleMapApiProvider) {
+        uiGmapGoogleMapApiProvider.configure({
+            key: 'AIzaSyD3-AQivwtRIpI7_UHBeQPhaI9kVX-tVPI',
+            v: '3.17',
+            libraries: 'weather,geometry,visualization'
+        });
+    });

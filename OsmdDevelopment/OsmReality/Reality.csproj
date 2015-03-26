@@ -134,6 +134,8 @@
     <Content Include="scripts\angular-file-upload-shim.min.js" />
     <Content Include="scripts\angular-file-upload.js" />
     <Content Include="scripts\angular-file-upload.min.js" />
+    <Content Include="scripts\angular-google-maps.js" />
+    <Content Include="scripts\angular-google-maps.min.js" />
     <Content Include="scripts\angular-loader.js" />
     <Content Include="scripts\angular-loader.min.js" />
     <Content Include="scripts\angular-messages.js" />
@@ -902,6 +904,8 @@
     <Content Include="scripts\i18n\angular-locale_zu.js" />
     <Content Include="scripts\jasmine-html.js" />
     <Content Include="scripts\jasmine.js" />
+    <Content Include="scripts\lodash.js" />
+    <Content Include="scripts\lodash.min.js" />
     <Content Include="scripts\ng-file-upload-all.js" />
     <Content Include="scripts\ng-file-upload-all.min.js" />
     <Content Include="Views\Login.html" />

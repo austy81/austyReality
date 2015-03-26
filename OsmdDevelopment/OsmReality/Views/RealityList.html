@@ -41,8 +41,11 @@
             </div>
         </div>
 
-        <div class="col-md-6" style="height: 555px;">
-            <div id="map-canvas" style="height: 100%;margin: 0px;padding: 0px;"></div>
+        <div class="col-md-6">
+            <ui-gmap-google-map center='map.center' style="height: 555px;" zoom='map.zoom' draggable="true" options="options" bounds="map.bounds">
+                <ui-gmap-markers models="mapMarkers" coords="'self'" icon="'icon'">
+                </ui-gmap-markers>
+            </ui-gmap-google-map>
         </div>
     </div>
     <script type="text/ng-template" id="realityDetailPopup">
