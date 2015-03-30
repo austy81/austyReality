@@ -41,11 +41,8 @@
             </div>
         </div>
 
-        <div class="col-md-6">
-            <ui-gmap-google-map center='map.center' style="height: 555px;" zoom='map.zoom' draggable="true" options="options" bounds="map.bounds">
-                <ui-gmap-markers models="mapMarkers" coords="'self'" icon="'icon'">
-                </ui-gmap-markers>
-            </ui-gmap-google-map>
+        <div class="col-md-6" ng-include="'Views/realityMap.html'">
+
         </div>
     </div>
     <script type="text/ng-template" id="realityDetailPopup">

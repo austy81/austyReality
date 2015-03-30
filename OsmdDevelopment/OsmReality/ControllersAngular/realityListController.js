@@ -83,7 +83,7 @@
                         alert(msg.ExceptionMessage);
                     });
             };
-
+            
             //https://angular-ui.github.io/angular-google-maps/#!/
             $scope.map = { center: { latitude: 50.011, longitude: 15.311 }, zoom: 7 };
             $scope.mapMarkers = [];
