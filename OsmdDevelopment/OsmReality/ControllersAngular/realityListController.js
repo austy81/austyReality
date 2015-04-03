@@ -1,9 +1,8 @@
 ﻿angular.module('realityApp')
     .controller('realityListController', [
-        '$scope', '$http', '$location', '$modal', '$routeParams', 'realityConstants', 'uiGmapGoogleMapApi', function($scope, $http, $location, $modal, $routeParams, realityConstants, uiGmapGoogleMapApi) {
+        '$scope', '$http', '$location', '$modal', '$routeParams', 'realityConstants', 'uiGmapGoogleMapApi', 'uiGmapIsReady', function ($scope, $http, $location, $modal, $routeParams, realityConstants, uiGmapGoogleMapApi, uiGmapIsReady) {
 
             $scope.init = function() {
-                //$routeParams.realityId
                 $scope.searchReality();
             }
 
@@ -85,11 +84,47 @@
             };
             
             //https://angular-ui.github.io/angular-google-maps/#!/
-            $scope.map = { center: { latitude: 50.011, longitude: 15.311 }, zoom: 7 };
-            $scope.mapMarkers = [];
-            $scope.options = {
-                scrollwheel: false
+            var events = {
+                places_changed: function (searchBox) {
+
+                }
             };
+
+            $scope.markers = [
+                { latitude: 50.011, longitude: 15.311 }
+            ];
+
+            uiGmapGoogleMapApi.then(function (maps) {
+                $scope.bounds = new maps.LatLngBounds();
+                angular.forEach($scope.markers, function (value, key) {
+                    var myLatLng = new maps.LatLng($scope.markers[key].latitude, $scope.markers[key].longitude);
+                    $scope.bounds.extend(myLatLng);
+                });
+                $scope.map = {
+                    center:
+                        {
+                            latitude: $scope.bounds.getCenter().lat(),
+                            longitude: $scope.bounds.getCenter().lng()
+                        },
+                    zoom: 7
+                };
+                $scope.map.options = {};
+
+            });
+
+            $scope.control = {};
+
+            //uiGmapIsReady.promise().then((function(maps) {
+            //    $scope.control.getGMap().fitBounds($scope.bounds);
+            //}));
+
+            //$scope.refreshMap = function() {
+            //    $scope.control.refresh({ latitude: $scope.bounds.getCenter().lat(), longitude: $scope.bounds.getCenter().lng() });
+            //};
+
+            //$scope.streetZoom = function() {
+            //    $scope.control.getGMap().setZoom(7);
+            //};
 
 
             $scope.showAllOnMap = function() {
@@ -104,7 +139,7 @@
                 //todo fix this
                 var marker = { "id": 2, "latitude": 15, "longitude": 30, "showWindow": true };
 
-                $scope.mapMarkers.push(marker);
+                $scope.markers.push(marker);
             }
         }
     ]);

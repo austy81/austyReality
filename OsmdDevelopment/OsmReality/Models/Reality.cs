@@ -45,6 +45,12 @@ namespace AustyReality.Models
         public DateTime InsertDate { get; set; }
 
         [Required]
+        public decimal Latitude { get; set; }
+
+        [Required]
+        public decimal Longitude { get; set; }
+
+        [Required]
         public EDealType DealType { get; set; }
 
         [NotMapped]

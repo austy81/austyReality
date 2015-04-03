@@ -41,8 +41,21 @@
             </div>
         </div>
 
-        <div class="col-md-6" ng-include="'Views/realityMap.html'">
-
+        <div class="col-md-6">
+            <style>
+            .angular-google-map-container { height: 500px; }
+            </style>
+            <ui-gmap-google-map 
+                center="map.center" 
+                zoom="map.zoom" 
+                options="map.options"
+                control="control">
+                <ui-gmap-marker idkey="$index" coords="item" ng-repeat="item in markers track by $index">
+                    <ui-gmap-window options="windowOptions" closeclick="closeClick()">
+                        <p class="google-window">{{item.latitude}}, {{item.longitude}}</p>
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
         </div>
     </div>
     <script type="text/ng-template" id="realityDetailPopup">
