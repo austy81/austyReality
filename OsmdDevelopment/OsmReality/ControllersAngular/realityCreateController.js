@@ -68,16 +68,16 @@
                 }
             };
 
-            $scope.markers = [
-                { latitude: 50.011, longitude: 15.311 }
-            ];
+            $scope.marker = { latitude: 50.011, longitude: 15.311 };
+            $scope.markerOptions = {
+                draggable: true
+            };
 
             uiGmapGoogleMapApi.then(function(maps) {
                 $scope.bounds = new maps.LatLngBounds();
-                angular.forEach($scope.markers, function(value, key) {
-                    var myLatLng = new maps.LatLng($scope.markers[key].latitude, $scope.markers[key].longitude);
-                    $scope.bounds.extend(myLatLng);
-                });
+                var myLatLng = new maps.LatLng($scope.marker.latitude, $scope.marker.longitude);
+                $scope.bounds.extend(myLatLng);
+                
                 $scope.map = {
                     center:
                         {
