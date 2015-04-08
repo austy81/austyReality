@@ -62,7 +62,8 @@
                 }
             };
 
-            $scope.marker = { latitude: 50.011, longitude: 15.311 };
+            var centerOfCR = { latitude: 50.011, longitude: 15.311 };
+            $scope.marker = centerOfCR;
             $scope.markerOptions = {
                 draggable: true
             };
@@ -82,7 +83,10 @@
                                     }
                                     if (component.types.indexOf('route') > -1) {
                                         $scope.street = component.long_name;
-                                    }
+                                    } 
+                                    if (component.types.indexOf('neighborhood') > -1) {
+                                        $scope.locality = component.long_name;
+                                    } 
                                     if (component.types.indexOf('sublocality') > -1) {
                                         $scope.city = component.long_name;
                                     }
@@ -97,7 +101,7 @@
                             if (place.geometry.location) {
                                 $scope.marker.longitude = place.geometry.location.B;
                                 $scope.marker.latitude = place.geometry.location.k;
-                                $scope.streetZoom();
+                                $scope.recenterMap(17);
                             }
 
                         }
@@ -112,29 +116,22 @@
                 events: events,
                 options: {
                     autocomplete: true, //https://developers.google.com/maps/documentation/javascript/reference#Autocomplete
-                    //types: ['(address)'],  //https://developers.google.com/places/supported_types
+                    //types: ['(cities)'],  //https://developers.google.com/places/supported_types
                     componentRestrictions: { country: 'cz' }
                 }
             }
 
             uiGmapGoogleMapApi.then(function(maps) {
-                $scope.bounds = new maps.LatLngBounds();
-                var myLatLng = new maps.LatLng($scope.marker.latitude, $scope.marker.longitude);
-                $scope.bounds.extend(myLatLng);
-                
-                $scope.map = {
-                    center:
-                        {
-                            latitude: $scope.bounds.getCenter().lat(),
-                            longitude: $scope.bounds.getCenter().lng()
-                        },
-                    zoom: 7
-                };
+                //$scope.bounds = new maps.LatLngBounds();
+                //var myLatLng = new maps.LatLng($scope.marker.latitude, $scope.marker.longitude);
+                //$scope.bounds.extend(myLatLng);
+
+                $scope.recenterMap(7);
                 $scope.map.options = {};
 
             });
 
-            $scope.control = {};
+            //$scope.control = {};
 
             //uiGmapIsReady.promise().then((function(maps) {
             //    $scope.control.getGMap().fitBounds($scope.bounds);
@@ -144,8 +141,17 @@
             //    $scope.control.refresh({ latitude: $scope.bounds.getCenter().lat(), longitude: $scope.bounds.getCenter().lng() });
             //};
 
-            $scope.streetZoom = function() {
-                $scope.control.getGMap().setZoom(7);
+            $scope.recenterMap = function (targetZoom) {
+
+                $scope.map =
+                {
+                    center:
+                    {
+                        latitude: $scope.marker.latitude,
+                        longitude: $scope.marker.longitude
+                    },
+                    zoom: targetZoom
+                };
             };
 
         }
