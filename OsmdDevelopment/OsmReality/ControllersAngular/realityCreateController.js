@@ -19,8 +19,8 @@
                     Price: $scope.price,
                     DealDescription: $scope.dealDescription,
                     RealityUserId: user.userId,
-                    Latitude: $scope.latitude,
-                    Longitude: $scope.longitude
+                    Latitude: $scope.marker.latitude,
+                    Longitude: $scope.marker.longitude
                 }
 
                 var url = realityConstants.webApiURLReality;
@@ -62,16 +62,60 @@
                 }
             };
 
-            var events = {
-                places_changed: function(searchBox) {
-
-                }
-            };
-
             $scope.marker = { latitude: 50.011, longitude: 15.311 };
             $scope.markerOptions = {
                 draggable: true
             };
+
+            $scope.address = [];
+
+            var events = {
+                place_changed: function (searchBox) {
+                    var place = searchBox.getPlace();
+                    if (place) {
+                        if (place.address_components) {
+                            place.address_components.forEach(function (component) {
+                                if (component.types) {
+                                    //premise -- 612
+                                    if (component.types.indexOf('street_number') > -1) {
+                                        $scope.streetNumber = component.long_name;
+                                    }
+                                    if (component.types.indexOf('route') > -1) {
+                                        $scope.street = component.long_name;
+                                    }
+                                    if (component.types.indexOf('sublocality') > -1) {
+                                        $scope.city = component.long_name;
+                                    }
+                                    if (component.types.indexOf('locality') > -1) {
+                                        $scope.region = component.long_name;
+                                    }
+
+                                }
+                            });
+                        }
+                        if (place.geometry) {
+                            if (place.geometry.location) {
+                                $scope.marker.longitude = place.geometry.location.B;
+                                $scope.marker.latitude = place.geometry.location.k;
+                                $scope.streetZoom();
+                            }
+
+                        }
+
+                    }
+                }
+            }
+            $scope.searchbox = { //https://developers.google.com/maps/documentation/javascript/reference#SearchBox
+                template: 'searchbox.tpl.html',
+                parentdiv: 'searchboxParent',
+                //position: 'top-left',
+                events: events,
+                options: {
+                    autocomplete: true, //https://developers.google.com/maps/documentation/javascript/reference#Autocomplete
+                    //types: ['(address)'],  //https://developers.google.com/places/supported_types
+                    componentRestrictions: { country: 'cz' }
+                }
+            }
 
             uiGmapGoogleMapApi.then(function(maps) {
                 $scope.bounds = new maps.LatLngBounds();
@@ -86,7 +130,7 @@
                         },
                     zoom: 7
                 };
-                $scope.map.options = {  };
+                $scope.map.options = {};
 
             });
 
@@ -100,9 +144,9 @@
             //    $scope.control.refresh({ latitude: $scope.bounds.getCenter().lat(), longitude: $scope.bounds.getCenter().lng() });
             //};
 
-            //$scope.streetZoom = function() {
-            //    $scope.control.getGMap().setZoom(7);
-            //};
+            $scope.streetZoom = function() {
+                $scope.control.getGMap().setZoom(7);
+            };
 
         }
     ]);

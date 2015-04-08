@@ -23,6 +23,6 @@
         uiGmapGoogleMapApiProvider.configure({
             key: 'AIzaSyD3-AQivwtRIpI7_UHBeQPhaI9kVX-tVPI',
             v: '3.17',
-            libraries: 'places,geometry,visualization'
+            libraries: 'places'
         });
     });
