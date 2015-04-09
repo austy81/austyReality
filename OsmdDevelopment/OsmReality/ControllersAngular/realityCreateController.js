@@ -68,13 +68,20 @@
                 draggable: true
             };
 
-            $scope.address = [];
+            $scope.address = {};
 
             var events = {
                 place_changed: function (searchBox) {
                     var place = searchBox.getPlace();
                     if (place) {
                         if (place.address_components) {
+
+                            $scope.streetNumber = '';
+                            $scope.street = '';
+                            $scope.locality = '';
+                            $scope.city = '';
+                            $scope.region = '';
+
                             place.address_components.forEach(function (component) {
                                 if (component.types) {
                                     //premise -- 612
@@ -121,11 +128,7 @@
                 }
             }
 
-            uiGmapGoogleMapApi.then(function(maps) {
-                //$scope.bounds = new maps.LatLngBounds();
-                //var myLatLng = new maps.LatLng($scope.marker.latitude, $scope.marker.longitude);
-                //$scope.bounds.extend(myLatLng);
-
+            uiGmapGoogleMapApi.then(function() {
                 $scope.recenterMap(7);
                 $scope.map.options = {};
 

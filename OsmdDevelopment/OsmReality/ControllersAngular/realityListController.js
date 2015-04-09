@@ -67,16 +67,19 @@
             $scope.getDataFromServer = function(searchParams) {
                 var url = realityConstants.webApiURLReality;
                 $http(
-                    {
-                        url: url,
-                        method: "GET",
-                        params: searchParams
-                    }).success(function(data) {
-                        if (data.constructor === Array)
+                {
+                    url: url,
+                    method: "GET",
+                    params: searchParams
+                }).success(function(data) {
+                        if (data.constructor === Array) {
                             $scope.realityList = data;
-                        else
-                            $scope.realityList = [data];
-                        $scope.showAllOnMap();
+                            $scope.markers = [];
+                            data.forEach(function(item) {
+                                $scope.markers.push({ id: item.RealityId, longitude: item.Longitude, latitude: item.Latitude });
+                            });
+                            //applyMapBounds();
+                        };
                     })
                     .error(function(msg) {
                         alert(msg.ExceptionMessage);
@@ -84,62 +87,45 @@
             };
             
             //https://angular-ui.github.io/angular-google-maps/#!/
-            var events = {
-                places_changed: function (searchBox) {
+            var centerOfCR = { latitude: 50.011, longitude: 15.311 };
 
-                }
-            };
-
-            $scope.markers = [
-                { latitude: 50.011, longitude: 15.311 }
-            ];
+            $scope.markers = [];
 
             uiGmapGoogleMapApi.then(function (maps) {
-                $scope.bounds = new maps.LatLngBounds();
-                angular.forEach($scope.markers, function (value, key) {
-                    var myLatLng = new maps.LatLng($scope.markers[key].latitude, $scope.markers[key].longitude);
-                    $scope.bounds.extend(myLatLng);
-                });
+
                 $scope.map = {
-                    center:
-                        {
-                            latitude: $scope.bounds.getCenter().lat(),
-                            longitude: $scope.bounds.getCenter().lng()
-                        },
+                    center: centerOfCR,
                     zoom: 7
                 };
                 $scope.map.options = {};
 
+                applyMapBounds();
+
             });
 
-            $scope.control = {};
+            var applyMapBounds = function() {
+                //var bounds = new $scope.map.control.getGMap().LatLngBounds();
+                //for (var i = 0; i < $scope.markers.length; i++) {
+                //    var geoCode = new $scope.map.control.getGMap().LatLng($scope.markers[i].latitude, $scope.markers[i].longitude);
+                //    bounds.extend(geoCode);
+                //}
 
-            //uiGmapIsReady.promise().then((function(maps) {
-            //    $scope.control.getGMap().fitBounds($scope.bounds);
-            //}));
+                //$scope.map.control.fitBounds(bounds);
+            };
 
-            //$scope.refreshMap = function() {
-            //    $scope.control.refresh({ latitude: $scope.bounds.getCenter().lat(), longitude: $scope.bounds.getCenter().lng() });
-            //};
+        //$scope.map.control = {};
 
-            //$scope.streetZoom = function() {
-            //    $scope.control.getGMap().setZoom(7);
-            //};
+        //uiGmapIsReady.promise().then((function(maps) {
+        //    $scope.map.control.getGMap().fitBounds($scope.bounds);
+        //}));
 
+        //$scope.refreshMap = function() {
+        //    $scope.map.control.refresh({ latitude: $scope.bounds.getCenter().lat(), longitude: $scope.bounds.getCenter().lng() });
+        //};
 
-            $scope.showAllOnMap = function() {
-                $scope.mapMarkers = [];
-                for (var i = 0; i < $scope.realityList.length; i++) {
-                    $scope.addMapMarker($scope.realityList[i], 12, (i == $scope.realityList.length - 1));
-                }
-            }
+        //$scope.streetZoom = function() {
+        //    $scope.map.control.getGMap().setZoom(7);
+        //};
 
-            $scope.addMapMarker = function(reality, zoom, moveFocus) {
-                var address = reality.City + ', ' + reality.Street + ' ' + reality.StreetNumber;
-                //todo fix this
-                var marker = { "id": 2, "latitude": 15, "longitude": 30, "showWindow": true };
-
-                $scope.markers.push(marker);
-            }
-        }
+    }
     ]);
