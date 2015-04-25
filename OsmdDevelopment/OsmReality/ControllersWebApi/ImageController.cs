@@ -77,8 +77,8 @@ namespace AustyReality.ControllersWebApi
         private void UploadImage(Image imageData, RealityImage image, Size imgSize, AzureBlob.RealityBlobType blobType)
         {
             var imgResized = ImageResizer.Resize(imageData, imgSize, imageQuality);
-            imgResized.Save(string.Format(@"c:\temp\{0}-{1}.jpg", image.RealityId, image.Guid));
-            return;
+            //imgResized.Save(string.Format(@"c:\temp\{0}-{1}.jpg", image.RealityId, image.Guid));
+            //return;
 
             Stream resizedImageStrem = new MemoryStream();
             imgResized.Save(resizedImageStrem, ImageFormat.Jpeg);

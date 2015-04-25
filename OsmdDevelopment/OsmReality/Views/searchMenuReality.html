@@ -1,5 +1,5 @@
 ﻿<form class="pageLeft">
-    <h3 style="margin-left:5px;">Vyhledávání</h3>
+    <h3>Vyhledávání</h3>
     <div>Dispozice</div>
     <div id="DealTypeGroup" class="btn-group">
         <label class="btn btn-default" ng-model="searchParamsDisposition.d1" btn-checkbox>1</label>
@@ -19,9 +19,9 @@
     <br />
     <div>Cena</div>
     <div>
-        <input id="priceFrom" type="number" class="form-control" ng-model="searchParamsPriceFrom" />
+        <input id="priceFrom" type="number" step="500" class="form-control" ng-model="searchParamsPriceFrom" />
         -
-        <input id="priceTo" type="number" class="form-control" ng-model="searchParamsPriceTo" />
+        <input id="priceTo" type="number" step="500" class="form-control" ng-model="searchParamsPriceTo" />
     </div>
     <br />
     <div><button class="btn btn-default" ng-click="searchReality()">Vyhledat</button></div>

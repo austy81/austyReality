@@ -1,8 +1,8 @@
 ﻿<div ng-init="init()">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <form>
-                <h3 style="margin-left:5px;">Vyhledávání</h3>
+                <h3>Vyhledávání</h3>
                 <div>Dispozice</div>
                 <div id="DealTypeGroup" class="btn-group">
                     <label class="btn btn-default" ng-model="searchParamsDisposition[0]" btn-checkbox>1</label>
@@ -31,10 +31,9 @@
             </form>
         </div>
 
-        <div class="col-md-3" style="overflow-y: scroll;">
-            <h3 style="margin-left:5px;">Výsledky ({{realityListLength();}})</h3>
-            <div ng-repeat="x in realityList"
-                 style="margin:5px 10px 10px 10px; height: 600px;">
+        <div class="col-md-4 scrollbar" id="style-1" style="overflow-y: scroll;height: 500px;">
+            <h3>Výsledky ({{realityListLength();}})</h3>
+            <div ng-repeat="x in realityList">
                 <div ng-include="'Views/searchResultReality.html'">
 
                 </div>
