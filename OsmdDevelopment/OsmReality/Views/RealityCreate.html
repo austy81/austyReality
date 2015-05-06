@@ -12,7 +12,7 @@
         </div>
         <div class="form-group ">
             <label class="col-sm-2 control-label">Dispozice</label>
-            <div class="col-sm-10">
+            <div class="col-sm-3">
                 <select class="form-control" ng-model="disposition">
                     <option value="0">1+</option>
                     <option value="1">2+</option>
@@ -22,20 +22,16 @@
                     <option value="5">6+</option>
                 </select>
             </div>
-        </div>
-        
-        <div class="form-group ">
-            <label class="col-sm-2 control-label">Kuchyně</label>
-            <div class="col-sm-10">
+            <div class="col-sm-7" data-toggle="tooltip" data-original-title="Default tooltip">
                 <select class="form-control" ng-model="kitchen">
-                    <option value="0">kuchyňský kout</option>
-                    <option value="1">samostatná místnost</option>
+                    <option value="0" selected>kuchyňský kout</option>
+                    <option value="1">samostatná kuchyň</option>
                 </select>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="region" class="col-sm-2 control-label">Vyhledávání</label>
+            <label class="col-sm-2 control-label">Vyhledávání</label>
             <div id="searchboxParent" class="col-sm-10">
             
             </div>
@@ -44,7 +40,7 @@
         <div class="form-group">
             <label for="region" class="col-sm-2 control-label">Region</label>
             <div class="col-sm-10">
-                <input ng-model="region" class="form-control" placeholder="region">
+                <input ng-model="region" class="form-control" placeholder="region" popover="I fade in and out!">
             </div>
         </div>
         <div class="form-group">
