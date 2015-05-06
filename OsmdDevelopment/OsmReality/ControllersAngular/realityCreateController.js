@@ -6,6 +6,7 @@
             //defaults
             $scope.disposition = 0;
             $scope.dealType = 0;
+            $scope.kitchen = 0;
 
             $scope.createReality = function() {
                 var data = {

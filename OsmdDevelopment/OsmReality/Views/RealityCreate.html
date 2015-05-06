@@ -1,9 +1,9 @@
 ﻿<div>
-    <div class="form-horizontal col-md-6">
+    <div class="form-horizontal col-md-4">
 
         <div class="form-group">
-            <label class="col-sm-2 control-label">Nemovitost</label>
-            <div class="col-sm-10">
+            <label class="col-sm-3 control-label">Nemovitost</label>
+            <div class="col-sm-9">
                 <select class="form-control" ng-model="dealType">
                     <option value="0">Pro bydlení</option>
                     <option value="1">Nebytové prostory</option>
@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="form-group ">
-            <label class="col-sm-2 control-label">Dispozice</label>
+            <label class="col-sm-3 control-label">Dispozice</label>
             <div class="col-sm-3">
                 <select class="form-control" ng-model="disposition">
                     <option value="0">1+</option>
@@ -22,62 +22,62 @@
                     <option value="5">6+</option>
                 </select>
             </div>
-            <div class="col-sm-7" data-toggle="tooltip" data-original-title="Default tooltip">
+            <div class="col-sm-6">
                 <select class="form-control" ng-model="kitchen">
-                    <option value="0" selected>kuchyňský kout</option>
+                    <option value="0">kuchyňský kout</option>
                     <option value="1">samostatná kuchyň</option>
                 </select>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label">Vyhledávání</label>
-            <div id="searchboxParent" class="col-sm-10">
+            <label class="col-sm-3 control-label">Vyhledávání</label>
+            <div id="searchboxParent" class="col-sm-9 ">
             
             </div>
         </div>
     
         <div class="form-group">
-            <label for="region" class="col-sm-2 control-label">Region</label>
-            <div class="col-sm-10">
-                <input ng-model="region" class="form-control" placeholder="region" popover="I fade in and out!">
+            <label for="region" class="col-sm-3 control-label">Region</label>
+            <div class="col-sm-9">
+                <input ng-model="region" class="form-control" placeholder="region" />
             </div>
         </div>
+        
         <div class="form-group">
-            <label for="city" class="col-sm-2 control-label">Obec</label>
-            <div class="col-sm-10">
+            <label for="city" class="col-sm-3 control-label">Obec</label>
+            <div class="col-sm-9">
                 <input class="form-control" ng-model="city" placeholder="city">
             </div>
         </div>
+        
         <div class="form-group">
-            <label for="locality" class="col-sm-2 control-label">Lokalita</label>
-            <div class="col-sm-10">
+            <label for="locality" class="col-sm-3 control-label">Lokalita</label>
+            <div class="col-sm-9">
                 <input class="form-control" ng-model="locality" placeholder="locality">
             </div>
         </div>
+        
         <div class="form-group">
-            <label for="street" class="col-sm-2 control-label">Ulice</label>
-            <div class="col-sm-10">
-                <input class="col-sm-8" ng-model="street" placeholder="street">
-                <input class="col-sm-2" ng-model="streetNumber" placeholder="streetNumber">
+            <label for="street" class="col-sm-3 control-label">Ulice</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="street" placeholder="ulice">
+            </div>
+            <div class="col-sm-3">
+                <input class="form-control" ng-model="streetNumber" placeholder="číslo">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="price" class="col-sm-3 control-label">Cena</label>
+            <div class="col-sm-9">
+                <input class="form-control" ng-model="price" placeholder="cena" />
             </div>
         </div>
         <div class="form-group">
-            <label for="streetNumber" class="col-sm-2 control-label">streetNumber</label>
-            <div class="col-sm-10">
-            
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="price" class="col-sm-2 control-label">price</label>
-            <div class="col-sm-10">
-                <input class="form-control" ng-model="price" placeholder="price" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="dealDescription" class="col-sm-2 control-label">dealDescription</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" rows="3" ng-model="dealDescription" placeholder="dealDescription"></textarea>
+            <label for="dealDescription" class="col-sm-3 control-label">Popis</label>
+            <div class="col-sm-9">
+                <textarea class="form-control" rows="4" ng-model="dealDescription" placeholder="stručný popis"></textarea>
             </div>
         </div>
 
@@ -103,12 +103,12 @@
         <div ng-click="createReality()" class="btn btn-default">CREATE!!!</div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-8">
         <style>
             .angular-google-map-container { height: 500px; }
         </style>
         <script type="text/ng-template" id="searchbox.tpl.html">
-            <input type="text" ng-model="address" placeholder="Adresa" required style="width:100%" />
+            <input type="text" ng-model="address" class="form-control" placeholder="ulice číslo město" required style="width:100%" tooltip="Vyplňte celou adresu, vyberte nabízený výsledek myší nebo šipkou a adresa se Vám předvyplní do příslušných polí." tooltip-trigger="focus" tooltip-class="tooltip-light" />
         </script>
         <ui-gmap-google-map 
             center="map.center" 
