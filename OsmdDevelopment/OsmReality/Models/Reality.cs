@@ -20,6 +20,12 @@ namespace AustyReality.Models
         d5,
         d6
     }
+
+    public enum EKitchen
+    {
+        partOfLivingRoom,
+        separate
+    }
     
     public class Reality 
     {
@@ -67,6 +73,9 @@ namespace AustyReality.Models
         {
             get { return Disposition.ToString(); }
         }
+
+        [Required]
+        public EKitchen Kitchen { get; set; }
 
         [Required]
         [MaxLength(100)]

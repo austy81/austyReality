@@ -2,7 +2,7 @@
     <div class="form-horizontal col-md-6">
 
         <div class="form-group">
-            <label for="dealType" class="col-sm-2 control-label">Nemovitost</label>
+            <label class="col-sm-2 control-label">Nemovitost</label>
             <div class="col-sm-10">
                 <select class="form-control" ng-model="dealType">
                     <option value="0">Pro bydlení</option>
@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="form-group ">
-            <label for="disposition" class="col-sm-2 control-label">Dispozice</label>
+            <label class="col-sm-2 control-label">Dispozice</label>
             <div class="col-sm-10">
                 <select class="form-control" ng-model="disposition">
                     <option value="0">1+</option>
@@ -23,6 +23,17 @@
                 </select>
             </div>
         </div>
+        
+        <div class="form-group ">
+            <label class="col-sm-2 control-label">Kuchyně</label>
+            <div class="col-sm-10">
+                <select class="form-control" ng-model="kitchen">
+                    <option value="0">kuchyňský kout</option>
+                    <option value="1">samostatná místnost</option>
+                </select>
+            </div>
+        </div>
+
         <div class="form-group">
             <label for="region" class="col-sm-2 control-label">Vyhledávání</label>
             <div id="searchboxParent" class="col-sm-10">

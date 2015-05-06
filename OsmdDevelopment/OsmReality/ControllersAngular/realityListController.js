@@ -1,6 +1,6 @@
 ﻿angular.module('realityApp')
     .controller('realityListController', [
-        '$scope', '$http', '$location', '$modal', '$routeParams', 'realityConstants', 'uiGmapGoogleMapApi', 'uiGmapIsReady', function ($scope, $http, $location, $modal, $routeParams, realityConstants, uiGmapGoogleMapApi, uiGmapIsReady) {
+        '$scope', '$http', '$location', '$modal', '$routeParams', 'realityConstants', 'uiGmapGoogleMapApi', 'uiGmapIsReady', function($scope, $http, $location, $modal, $routeParams, realityConstants, uiGmapGoogleMapApi, uiGmapIsReady) {
 
             $scope.init = function() {
                 $scope.searchReality();
@@ -11,14 +11,18 @@
             }
 
             $scope.searchParamsDisposition = [true, true, true, true, true, true];
+            $scope.searchParamsKitchen = [true, true];
             $scope.searchParamsCity = "";
             $scope.searchParamsLocality = "";
             $scope.searchParamsPriceFrom = 0;
             $scope.searchParamsPriceTo = 1000000;
 
+            $scope.loading = true;
+
             $scope.searchParams = function() {
                 return {
                     Dispositions: getSelectedDispositions(),
+                    Kitchen: $scope.searchParamsKitchen,
                     City: $scope.searchParamsCity,
                     Locality: $scope.searchParamsLocality,
                     PriceFrom: $scope.searchParamsPriceFrom,
@@ -66,32 +70,34 @@
 
             $scope.getDataFromServer = function(searchParams) {
                 var url = realityConstants.webApiURLReality;
+                $scope.loading = true;
                 $http(
-                {
-                    url: url,
-                    method: "GET",
-                    params: searchParams
-                }).success(function(data) {
+                    {
+                        url: url,
+                        method: "GET",
+                        params: searchParams
+                    }).success(function(data) {
                         if (data.constructor === Array) {
                             $scope.realityList = data;
                             $scope.markers = [];
                             data.forEach(function(item) {
                                 $scope.markers.push({ id: item.RealityId, longitude: item.Longitude, latitude: item.Latitude });
                             });
-                            //applyMapBounds();
+                            $scope.loading = false;
                         };
                     })
                     .error(function(msg) {
                         alert(msg.ExceptionMessage);
+                        $scope.loading = false;
                     });
             };
-            
+
             //https://angular-ui.github.io/angular-google-maps/#!/
             var centerOfCR = { latitude: 50.011, longitude: 15.311 };
 
             $scope.markers = [];
 
-            uiGmapGoogleMapApi.then(function (maps) {
+            uiGmapGoogleMapApi.then(function(maps) {
 
                 $scope.map = {
                     center: centerOfCR,
@@ -113,19 +119,19 @@
                 //$scope.map.control.fitBounds(bounds);
             };
 
-        //$scope.map.control = {};
+            //$scope.map.control = {};
 
-        //uiGmapIsReady.promise().then((function(maps) {
-        //    $scope.map.control.getGMap().fitBounds($scope.bounds);
-        //}));
+            //uiGmapIsReady.promise().then((function(maps) {
+            //    $scope.map.control.getGMap().fitBounds($scope.bounds);
+            //}));
 
-        //$scope.refreshMap = function() {
-        //    $scope.map.control.refresh({ latitude: $scope.bounds.getCenter().lat(), longitude: $scope.bounds.getCenter().lng() });
-        //};
+            //$scope.refreshMap = function() {
+            //    $scope.map.control.refresh({ latitude: $scope.bounds.getCenter().lat(), longitude: $scope.bounds.getCenter().lng() });
+            //};
 
-        //$scope.streetZoom = function() {
-        //    $scope.map.control.getGMap().setZoom(7);
-        //};
+            //$scope.streetZoom = function() {
+            //    $scope.map.control.getGMap().setZoom(7);
+            //};
 
-    }
+        }
     ]);

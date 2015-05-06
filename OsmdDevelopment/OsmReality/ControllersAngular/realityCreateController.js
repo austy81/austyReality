@@ -11,6 +11,7 @@
                 var data = {
                     DealType: $scope.dealType,
                     Disposition: $scope.disposition,
+                    Kitchen: $scope.kitchen,
                     Region: $scope.region,
                     City: $scope.city,
                     Locality: $scope.locality,

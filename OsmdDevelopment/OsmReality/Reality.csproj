@@ -149,7 +149,6 @@
     <Content Include="scripts\ng-file-upload-all.min.js" />
     <Content Include="Views\Login.html" />
     <Content Include="Views\realityDetail.html" />
-    <Content Include="Views\searchMenuReality.html" />
     <Content Include="Views\searchResultReality.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
